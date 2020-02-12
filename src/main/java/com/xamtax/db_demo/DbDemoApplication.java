@@ -88,7 +88,7 @@ public class DbDemoApplication{
 
 	@GetMapping("/")
 	public String index(){
-		return "Available links are /add?firstName=&lastName=, /create, /all";
+		return "Available links are /create, /all, /show/{id}, and /add?firstName=&lastName=";
 	}
 
 

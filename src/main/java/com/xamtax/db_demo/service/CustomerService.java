@@ -21,12 +21,10 @@ public class CustomerService {
     }
 
 
-
     public void seed(){
         List<Object[]> splitUpNames = Arrays.asList("John Woo", "Jeff Dean", "Josh Bloch", "Josh Long").stream()
                 .map(name -> name.split(" "))
                 .collect(Collectors.toList());
-
         jdbcTemplate.batchUpdate("INSERT INTO customers(first_name, last_name) VALUES (?,?)", splitUpNames);
     }
 

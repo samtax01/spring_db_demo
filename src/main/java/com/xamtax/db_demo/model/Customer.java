@@ -19,7 +19,6 @@ public class Customer {
     }
 
 
-
     public long getId() {
         return id;
     }

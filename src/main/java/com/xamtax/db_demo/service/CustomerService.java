@@ -48,16 +48,18 @@ public class CustomerService {
     public List<Customer> all(){
         return jdbcTemplate.query(
                 "SELECT id, first_name, last_name FROM customers", new Object[] {},
-                (rs, rowNum) -> new Customer(rs.getLong("id"), rs.getString("first_name"), rs.getString("last_name"))
-        );
+                (rs, rowNum) -> Customer.builder().id(rs.getLong("id"))
+                        .firstName(rs.getString("first_name"))
+                        .lastName(rs.getString("last_name")).build());
     }
 
 
 
     public Customer find(int id){        List<Customer> customer = jdbcTemplate.query(
                 "SELECT id, first_name, last_name FROM customers WHERE id = ?", new Object[] { id },
-                (rs, rowNum) -> new Customer(rs.getLong("id"), rs.getString("first_name"), rs.getString("last_name"))
-        ); //.forEach(customer ->  buff.append(customer.toString()))
+                (rs, rowNum) -> Customer.builder().id(rs.getLong("id"))
+                        .firstName(rs.getString("first_name"))
+                        .lastName(rs.getString("last_name")).build());
         return (customer.stream().findFirst().isPresent())? customer.stream().findFirst().get(): null;
     }
 

@@ -15,9 +15,7 @@ import java.util.List;
 public class CustomerController {
 
     @Autowired
-    CustomerService customerService;
-
-
+    private CustomerService customerService;
 
 
     @GetMapping("customers")
@@ -39,19 +37,21 @@ public class CustomerController {
 
 
     @PostMapping("customers")
-    public int add(@RequestParam(name = "firstName") String firstName, @RequestParam(name = "lastName") String lastName){
-        return customerService.insert(firstName, lastName);
+    public String add(@RequestBody Customer customer){
+        return customerService.insert(customer) > 0? "Record Added!": "Failed";
     }
 
 
     @PutMapping("customers/{id}")
-    public int update(@PathVariable("id") int id, @RequestParam(name = "firstName") String firstName, @RequestParam(name = "lastName") String lastName){
-        return customerService.update(id, firstName, lastName);
+    public String update(@PathVariable("id") int id, @RequestBody Customer customer){
+        customer.setId(id);
+        return customerService.update(customer) > 0? "Record Updated!": "Failed";
     }
 
+
     @DeleteMapping("customers/{id}")
-    public int update(@PathVariable("id") int id){
-        return customerService.delete(id);
+    public String delete(@PathVariable("id") int id){
+        return customerService.delete(id) > 0? "Record Deleted!": "Failed";
     }
 
 
@@ -59,6 +59,24 @@ public class CustomerController {
     public String index(){
         return "<h3>HELLO WORLD</h3> Rest app...";
     }
+
+
+
+
+/*
+
+    @PutMapping("customers/{id}")
+    public String update(@PathVariable("id") int id, @RequestParam(name = "firstName") String firstName, @RequestParam(name = "lastName") String lastName){
+        return customerService.update(id, firstName, lastName) > 0? "Record Updated!": "Failed";
+    }
+*/
+
+/*
+    @PostMapping("customers")
+    public String add(@RequestParam(name = "firstName") String firstName, @RequestParam(name = "lastName") String lastName){
+        return customerService.insert(firstName, lastName) > 0? "Record Added!": "Failed";
+    }
+*/
 
 
 }

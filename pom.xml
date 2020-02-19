@@ -26,8 +26,11 @@
 		</repository>
 	</repositories>
 
-	<dependencies>
 
+
+
+
+	<dependencies>
 
 		<!-- auto reload enabled-->
 		<dependency>
